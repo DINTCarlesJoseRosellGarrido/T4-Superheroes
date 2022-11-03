@@ -1,0 +1,41 @@
+﻿<Window x:Name="mainWindow" x:Class="T4_Superheroes.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:T4_Superheroes"
+        xmlns:modelo="clr-namespace:T4_Superheroes.Modelos"
+        mc:Ignorable="d"
+        Title="MainWindow" MinHeight="500" MinWidth="700" Height="500" Width="700"  Icon="./assets/shield.ico">
+    <Window.Resources>
+        <modelo:BackgroundHeroe x:Key="conversorBack"></modelo:BackgroundHeroe>
+        <modelo:EstadoHeroe x:Key="conversorState"></modelo:EstadoHeroe>
+    </Window.Resources>
+    <DockPanel x:Name="DatosSuper" Background="{Binding Path=Heroe, Converter={StaticResource conversorBack}}">
+        <DockPanel DockPanel.Dock="Top" LastChildFill="False" Height="40" Margin="5">
+            <TextBlock DockPanel.Dock="Left" VerticalAlignment="Center" FontSize="30" FontWeight="Bold" Foreground="White" Text="{Binding Path=Nombre}">
+                <TextBlock.Effect>
+                    <DropShadowEffect/>
+                </TextBlock.Effect></TextBlock>
+            <Image Source="./assets/avengers.png" Visibility="{Binding Path=Vengador, Converter={StaticResource conversorState}}" DockPanel.Dock="Right"></Image>
+            <Image Source="./assets/xmen.png"  Visibility="{Binding Path=Xmen, Converter={StaticResource conversorState}}" DockPanel.Dock="Right" Margin="0,0,10,0"></Image>
+        </DockPanel>
+        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" Height="30" HorizontalAlignment="Center" Margin="5">
+            <Image x:Name="buttonPrevious" Source="./assets/arrow.png" MouseDown="buttonPrevious_MouseDown"></Image>
+            <TextBlock x:Name="numberChange" VerticalAlignment="Bottom" FontSize="22" FontWeight="Bold">1</TextBlock>
+            <TextBlock x:Name="numberStack" VerticalAlignment="Center" FontSize="22" FontWeight="Bold">/3</TextBlock>
+            <Image x:Name="buttonNext" Source="./assets/arrow.png" RenderTransformOrigin="0.5,0.5" MouseDown="buttonNext_MouseDown">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="180"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+        </StackPanel>
+        <Image x:Name="image" Source="{Binding Path=Imagen}" Stretch="UniformToFill" Margin="10,0,10,0">
+        </Image>
+    </DockPanel>
+</Window>
